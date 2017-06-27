@@ -24,6 +24,7 @@
         <clr-dropdown position="rightBottom"
                       :opened.sync="subMenuOpened"
                       :closeOnItemClick="false"
+                      :closeOnOutsideClick="false"
                       :siblingClicked="scope.clickedItem">
           <span slot="toggle">Sub Menu</span>
           <template scope="subScope">
