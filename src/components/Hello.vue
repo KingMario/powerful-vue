@@ -27,19 +27,19 @@
                       :closeOnOutsideClick="false"
                       :siblingClicked="scope.clickedItem">
           <span slot="toggle">Sub Menu</span>
-          <template scope="subScope">
+          <template scope="scope">
             <clr-dropdown position="leftBottom"
                           :opened.sync="subSubMenuOpened"
-                          :siblingClicked="subScope.clickedItem">
+                          :siblingClicked="scope.clickedItem">
               <span slot="toggle">Sub Sub Menu</span>
-              <template scope="subSubScope">
+              <template scope="scope">
                 <clr-dropdown-header>
                   Sub menu header is here
                 </clr-dropdown-header>
                 <clr-dropdown position="rightBottom"
                               :opened.sync="lastSubMenuOpened"
                               :closeOnOutsideClick="false"
-                              :siblingClicked="subSubScope.clickedItem">
+                              :siblingClicked="scope.clickedItem">
                   <span slot="toggle">Last Sub Menu</span>
                   <clr-dropdown-item v-for="i in 2" :key="i">
                     Last Sub Item {{i}}
@@ -60,7 +60,7 @@
             <clr-dropdown position="rightBottom"
                           :opened.sync="last2ndSubMenuOpened"
                           :closeOnOutsideClick="false"
-                          :siblingClicked="subScope.clickedItem">
+                          :siblingClicked="scope.clickedItem">
               <span slot="toggle">Last 2nd Sub Menu</span>
               <clr-dropdown-item v-for="i in 2" :key="i">
                 Last 2nd Sub Item {{i}}
