@@ -108,18 +108,15 @@
           this.close()
         }
       },
-      closeOnOutsideClick: {
-        handler (val) {
-          if (val) {
-            document.addEventListener('click', this.close)
-          }
-        },
-        immediate: true
-      },
       parentOpened (val) {
         if (!val && this.opened) {
           this.close()
         }
+      }
+    },
+    created () {
+      if (this.closeOnOutsideClick) {
+        document.addEventListener('click', this.close)
       }
     },
     destroyed () {
