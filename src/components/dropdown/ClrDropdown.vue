@@ -88,9 +88,7 @@
       },
       toggleClicked () {
         if (this.$parent.$options.name === 'clrDropdown') {
-          this.$nextTick(function () {
-            this.$parent.clickedItem = this
-          })
+          this.$parent.clickedItem = this
         }
         this.updateOpened(!this.opened)
       },
