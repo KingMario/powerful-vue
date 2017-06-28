@@ -4,11 +4,11 @@
       <slot name="toggle"></slot>
       <clr-icon-vue
         shape="caret"
-        :dir="$parent.$options.name === 'clrDropdown' ? 'right' : opened ? 'up' : 'down'">
+        :dir="subordinate ? 'right' : opened ? 'up' : 'down'">
       </clr-icon-vue>
     </button>
     <div class="dropdown-menu" v-show="opened" @click="itemClicked">
-      <slot :clickedItem="clickedItem"></slot>
+      <slot :clickedItem="clickedItem" :opened="opened"></slot>
     </div>
   </div>
 </template>
@@ -27,6 +27,10 @@
       opened: {
         type: Boolean,
         required: true
+      },
+      parentOpened: {
+        type: Boolean,
+        required: false
       },
       siblingClicked: {
       },
@@ -51,7 +55,7 @@
       clrPosition () {
         let position = hyphenate(this.position)
 
-        return this.$parent.$options.name !== 'clrDropdown'
+        return !this.subordinate
           ? [
             'bottom-left',
             'bottom-right',
@@ -69,8 +73,8 @@
             'right-top'
           ].indexOf(position) > -1 ? position : 'right-top'
       },
-      parentOpened () {
-        return this.$parent.$options.name === 'clrDropdown' && this.$parent.opened
+      subordinate () {
+        return this.$parent && this.$parent.$options.name === this.$options.name
       }
     },
     methods: {
@@ -82,12 +86,12 @@
       },
       clicked (ev) {
         if (!this.closeOnItemClick ||
-          this.$parent.$options.name !== 'clrDropdown') {
+          !this.subordinate) {
           ev.stopPropagation()
         }
       },
       toggleClicked () {
-        if (this.$parent.$options.name === 'clrDropdown') {
+        if (this.subordinate) {
           this.$parent.clickedItem = this
         }
         this.updateOpened(!this.opened)
