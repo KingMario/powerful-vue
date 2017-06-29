@@ -9,6 +9,8 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+var Dashboard = require('webpack-dashboard')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
@@ -24,6 +26,9 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
+
+var dashboard = new Dashboard()
+compiler.apply(new DashboardPlugin(dashboard.setData))
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
