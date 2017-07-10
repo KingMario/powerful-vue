@@ -54,24 +54,20 @@
     computed: {
       clrPosition () {
         let position = hyphenate(this.position)
+        let availablePositions = [
+          'bottom-left',
+          'bottom-right',
+          'top-left',
+          'top-right',
+          'left-bottom',
+          'left-top',
+          'right-bottom',
+          'right-top'
+        ]
 
         return !this.subordinate
-          ? [
-            'bottom-left',
-            'bottom-right',
-            'top-left',
-            'top-right',
-            'left-bottom',
-            'left-top',
-            'right-bottom',
-            'right-top'
-          ].indexOf(position) > -1 ? position : 'bottom-left'
-          : [
-            'left-bottom',
-            'left-top',
-            'right-bottom',
-            'right-top'
-          ].indexOf(position) > -1 ? position : 'right-top'
+          ? availablePositions.indexOf(position) > -1 ? position : 'bottom-left'
+          : availablePositions.indexOf(position) > 3 ? position : 'right-top'
       },
       subordinate () {
         return this.$parent && this.$parent.$options.name === this.$options.name

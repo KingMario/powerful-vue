@@ -38,7 +38,7 @@
                 <clr-dropdown-header>
                   Sub menu header is here
                 </clr-dropdown-header>
-                <clr-dropdown position="rightBottom"
+                <clr-dropdown position="somewhere"
                               :opened.sync="lastSubMenuOpened"
                               :closeOnOutsideClick="false"
                               :parentOpened="scope.opened"
